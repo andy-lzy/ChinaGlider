@@ -1,0 +1,10 @@
+/* Basic styles for your title */
+.title {
+    font-size: 66px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 150px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+  

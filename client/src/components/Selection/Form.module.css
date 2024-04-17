@@ -1,0 +1,22 @@
+.formFieldContainer {
+    position: relative;
+    /* left: 600px; Position the entire field this way */
+    margin-bottom: 120px;
+}
+  
+.selectLabel {
+    display: block;
+    font-size: 48px;
+    font-weight: 500;
+    text-align: left;
+    margin-top: 40px; /* Adjust if needed, based on design */
+}
+  
+.selectDropdown {
+    display: block;
+    width: 500px;
+    height: 80px;
+    /* Remove margin: 0 auto; to prevent auto centering */
+    margin-top: 5px; /* Space between the label and select */
+    font-size: 30px;
+}

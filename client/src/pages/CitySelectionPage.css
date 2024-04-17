@@ -1,0 +1,20 @@
+.descriptionText {
+    display: flex;
+    position: absolute;
+    margin-left: 250px;
+    top: 500px;
+    font-size: 48px;
+}
+
+.formContainer {
+    flex: 1; /* Each form container takes up equal space */
+    display: flex;
+    position: relative;
+    margin-left: 60%;
+    top: 150px;
+}
+
+.navigationButton {
+    position: relative;
+    left: 45%;
+}
