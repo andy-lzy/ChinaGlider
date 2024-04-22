@@ -5,18 +5,21 @@ import './App.css';
 import CitySelectionPage from './pages/CitySelectionPage';
 import StyleSelectionPage from './pages/StyleSelectionPage';
 import GeneratePlanPage from './pages/GeneratePlanPage';
-import { PlanProvider } from './Providers/PlanContext';
+import { ProvinceProvider } from './components/Context/ProvinceContext';
+import { CityProvider } from './components/Context/CityContext';
 
 function App() {
   return (
     <Router>
-      <PlanProvider>
-        <Routes>
-          <Route path="/" element={<CitySelectionPage />} />
-          <Route path="/style-selection" element={<StyleSelectionPage />} />
-          {/* <Route path="/generate-plan" element={<GeneratePlanPage />} /> */}
-        </Routes>
-      </PlanProvider>
+      <ProvinceProvider>
+        <CityProvider>
+          <Routes>
+            <Route path="/" element={<CitySelectionPage />} />
+            <Route path="/style-selection" element={<StyleSelectionPage />} />
+            {/* <Route path="/generate-plan" element={<GeneratePlanPage />} /> */}
+          </Routes>
+        </CityProvider>
+      </ProvinceProvider>
     </Router>
   );
 }

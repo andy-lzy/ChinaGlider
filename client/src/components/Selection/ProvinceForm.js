@@ -1,15 +1,17 @@
 import React from 'react';
 import Form from './Form';
+import { useProvince } from '../Context/ProvinceContext';
 
-function ProvinceForm({ provinces, province, setProvince }) {
+const ProvinceForm = ({ provinces }) => {
+  const { province, setProvince } = useProvince();
   return (
     <Form
       label="Province"
       options={provinces}
-      selectedValue={province}
-      onSelectChange={(e) => setProvince(e.target.value)}
+      selection={province}
+      setSelection={setProvince}
     />
   );
-}
+};
 
 export default ProvinceForm;

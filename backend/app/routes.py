@@ -6,7 +6,6 @@ def configure_routes(app):
     def get_provinces():
         provinces = cities.get_provinces()
         provinces.sort()
-        print(provinces)
         return jsonify(provinces)
     
     @app.route('/cities', methods=['GET'])

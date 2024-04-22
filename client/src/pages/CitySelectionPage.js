@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
+
+import './CitySelectionPage.css';
+
 import ProvinceForm from '../components/Selection/ProvinceForm.js';
 import CityForm from '../components/Selection/CityForm.js';
 import Title from '../components/Text/Title.js';
 import NavigationButton from '../components/Button/NavigationButton.js';
-
-import './CitySelectionPage.css';
+import { useProvince } from '../components/Context/ProvinceContext.js';
+import { useCity } from '../components/Context/CityContext.js';
 
 const base_url = 'http://localhost:5000'
 
 const CitySelectionPage = () => {
     // State and handlers for the first form (e.g., Province form)
     const [provinces, setProvinces] = useState([]);
-    const [province, setProvince] = useState('');
+    const { province: selectedProvince } = useProvince();
 
     useEffect(() => {
       const fetchProvinces = async() => {
@@ -29,18 +32,18 @@ const CitySelectionPage = () => {
     
     // State and handlers for the second form (e.g., City form)\
     const [cities, setCities] = useState([]);
-    const [city, setCity] = useState('');
+    const { city: selectedCity } = useCity();
 
     useEffect(() => {
-      if (!province) {
+      if (!selectedProvince) {
         console.log("province is not selected");
       }
       const fetchCities = async() => {
         try {
-          let province_formatted = province.replace(/ /g, '_');
+          console.log("province is " + selectedProvince);
+          let province_formatted = selectedProvince.replace(/ /g, '_');
           const response = await fetch(base_url + '/cities?province=' + province_formatted);
           const data = await response.json();
-          console.log(data);
           setCities(data);
         } catch (error) {
           console.error('Error fetching cities:', error);
@@ -48,7 +51,7 @@ const CitySelectionPage = () => {
       }
       
       fetchCities();
-    }, [province]);
+    }, [selectedProvince]);
   
     return (
       <div className="pageLayout">
@@ -60,19 +63,15 @@ const CitySelectionPage = () => {
         </div>
         <div className="formContainer">
           <ProvinceForm 
-            provinces={provinces} 
-            province={province} 
-            setProvince={setProvince} 
+            provinces={provinces}
           />
         </div>
         <div className="formContainer">
           <CityForm 
-            cities={cities} 
-            city={city} 
-            setCity={setCity} 
+            cities={cities}
           />
         </div>
-        <NavigationButton to="/style-selection" disabled={!city}>
+        <NavigationButton to="/style-selection" disabled={!selectedCity}>
           NEXT
         </NavigationButton>
       </div>

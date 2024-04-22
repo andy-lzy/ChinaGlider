@@ -1,13 +1,15 @@
 import React from 'react';
 import Form from './Form';
+import { useCity } from '../Context/CityContext';
 
-function CityForm({ cities, city, setCity }) {
+const CityForm = ({ cities }) => {
+  const { city, setCity } = useCity();
   return (
     <Form
       label="City"
       options={cities}
-      selectedValue={city}
-      onSelectChange={(e) => setCity(e.target.value)}
+      selection={city}
+      setSelection={setCity}
     />
   );
 }

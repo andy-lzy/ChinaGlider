@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import Title from '../components/Text/Title.js';
 import NavigationButton from '../components/Button/NavigationButton.js';
-import { usePlan } from '../Providers/PlanContext.js';
+import { useDestination } from '../components/Context/ProvinceContext.js';
 
 import './StyleSelectionPage.css'
 
 const StyleSelectionPage = () => {
-    const { selectedCity } = usePlan();
-    console.error(selectedCity);
 
     const [selectedIntensity, setSelectedIntensity] = useState('');
     const [selectedStyle, setSelectedStyle] = useState('');

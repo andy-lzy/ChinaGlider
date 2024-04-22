@@ -1,12 +1,22 @@
 import React from 'react';
 import styles from './Form.module.css';
+import { useProvince } from '../Context/ProvinceContext';
 
-const Form = ({ label, options, selectedValue, onSelectChange }) => {
+const Form = ({ label, options, selection, setSelection }) => {
+
+  const handleChange = (event) => {
+    setSelection(event.target.value);
+  };
+
   return (
     <div className={styles.formFieldContainer}>
       <label className={styles.selectLabel}>{label}</label>
-      <select value={selectedValue} onChange={onSelectChange} className={styles.selectDropdown}>
-        <option value="">--select--</option> {/* Placeholder option */}
+      <select
+        value={selection}
+        onChange={handleChange}
+        className={styles.selectDropdown}
+      >
+        <option value="">-- Select --</option>
         {options.map((option, index) => (
           <option key={index} value={option}>
             {option}
@@ -16,6 +26,5 @@ const Form = ({ label, options, selectedValue, onSelectChange }) => {
     </div>
   );
 };
-
 
 export default Form;
