@@ -3,28 +3,32 @@ import { useNavigate } from 'react-router-dom';
 
 import Title from '../components/Text/Title.js';
 import NavigationButton from '../components/Button/NavigationButton.js';
-import { useDestination } from '../components/Context/ProvinceContext.js';
+import { validateNumberInput } from '../components/Validator/Validators.js';
+import { useDaysCount } from '../components/Context/DaysCountContext.js';
+import { useTripIntensity } from '../components/Context/TripIntensityContext.js';
+import { useTripStyle } from '../components/Context/TripStyleContext.js';
 
 import './StyleSelectionPage.css'
 
 const StyleSelectionPage = () => {
 
-    const [selectedIntensity, setSelectedIntensity] = useState('');
-    const [selectedStyle, setSelectedStyle] = useState('');
-    const navigate = useNavigate();
+    const { daysCount, setDaysCount } = useDaysCount();
+    const { tripIntensity, setTripIntensity } = useTripIntensity();
+    const { tripStyle, setTripStyle } = useTripStyle();
+
+    const handleDaysCountChange = (event) => {
+        validateNumberInput(event);
+        setDaysCount(event.target.value);
+    };
 
     const handleIntensitySelect = (style) => {
-        setSelectedIntensity(style);
+        setTripIntensity(style);
     };
 
     const handleStyleSelect = (style) => {
-        setSelectedStyle(style);
+        setTripStyle(style);
     };
 
-    const handleNext = () => {
-        navigate('/next-page', { state: { selectedIntensity, selectedStyle } });
-    };
-  
     return (
       <div className="pageLayout">
         <div>
@@ -37,7 +41,7 @@ const StyleSelectionPage = () => {
             {/* Number of days input */}
             <div class="form-row">
                 <label for="numberOfDays">Number of days*</label>
-                <input type="number" id="numberOfDays" />
+                <input type="number" id="numberOfDays" min="1" max="15" onInput={handleDaysCountChange}/>
                 <span class="daysText">days</span>
             </div>
             
@@ -47,28 +51,28 @@ const StyleSelectionPage = () => {
                 <div class="grid-container">
                     <button 
                         class="grid-item" 
-                        onClick={() => handleIntensitySelect('Laid-back')} 
-                        className={`button ${selectedIntensity === 'Laid-back' ? 'selected' : ''}`}>
+                        onClick={() =>  handleIntensitySelect('Laid-back')} 
+                        className={`button ${tripIntensity === 'Laid-back' ? 'selected' : ''}`}>
                         Laid-back
                     </button>
                     <span class="or-text">or</span>
                     <button 
                         class="grid-item"
                         onClick={() => handleIntensitySelect('Intense')} 
-                        className={`button ${selectedIntensity === 'Intense' ? 'selected' : ''}`}>
+                        className={`button ${tripIntensity === 'Intense' ? 'selected' : ''}`}>
                         Intense
                     </button>
                     <button 
                         class="grid-item"
                         onClick={() => handleStyleSelect('City-Walk')} 
-                        className={`button ${selectedStyle === 'City-Walk' ? 'selected' : ''}`}>
+                        className={`button ${tripStyle === 'City-Walk' ? 'selected' : ''}`}>
                         City-Walk
                     </button>
                     <span class="or-text">or</span>
                     <button 
                         class="grid-item"
                         onClick={() => handleStyleSelect('Nature')} 
-                        className={`button ${selectedStyle === 'Nature' ? 'selected' : ''}`}>
+                        className={`button ${tripStyle === 'Nature' ? 'selected' : ''}`}>
                         Nature
                     </button>
                 </div>
@@ -77,7 +81,7 @@ const StyleSelectionPage = () => {
         <NavigationButton className="backButton" to="/">
           BACK
         </NavigationButton>
-        <NavigationButton className="nextButton" to="/">
+        <NavigationButton className="nextButton" to="/plan-generator" disabled={!tripIntensity || !tripStyle || !daysCount}>
           NEXT
         </NavigationButton>
       </div>
