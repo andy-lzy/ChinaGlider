@@ -40,7 +40,7 @@ const CitySelectionPage = () => {
       }
       const fetchCities = async() => {
         try {
-          console.log("province is " + selectedProvince);
+          console.log("Selected province " + selectedProvince);
           let province_formatted = selectedProvince.replace(/ /g, '_');
           const response = await fetch(base_url + '/cities?province=' + province_formatted);
           const data = await response.json();

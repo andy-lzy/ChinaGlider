@@ -1,0 +1,66 @@
+.city-selection-container {
+}
+
+.greeting-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 36px;
+    font-weight: 500;
+    color: #333;
+}
+
+.destination-text {
+    position: absolute;
+    height: 200px;
+    top: 35%;
+    left: 20%;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.select-province-label, .select-city-label {
+    display: block; /* Ensures label text is on its own line */
+    position: relative;
+    left: 60%;
+    top: 40px;
+    margin-bottom: 60px; /* Adjusts spacing below the label */
+    height: 40px;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 500;
+    align-self: flex-start;
+}
+  
+.select-province-label select, .select-city-label select {
+    display: block; /* Ensures select is on its own line below the label */
+    width: 300px; /* Adjust this as needed, could be a specific px or % value */
+    height: inherit;
+    margin: 0 auto; /* Centers the select element within its parent */
+    margin-top: 5px; /* Space between the label and select */
+    left: 50px;
+}
+
+.next-button {
+    position: relative;
+    left: 45%;
+    top: 100px;
+    height: 50px;
+    width: 15%;
+    padding: 10px;
+    background-color: #8d8e8e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.next-button:hover {
+    background-color: #5d5e60;
+}
