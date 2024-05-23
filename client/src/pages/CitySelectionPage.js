@@ -9,7 +9,6 @@ import NavigationButton from '../components/Button/NavigationButton.js';
 import { useProvince } from '../components/Context/ProvinceContext.js';
 import { useCity } from '../components/Context/CityContext.js';
 
-const base_url = 'http://localhost:5000'
 
 const CitySelectionPage = () => {
     // State and handlers for the first form (e.g., Province form)
@@ -17,15 +16,18 @@ const CitySelectionPage = () => {
     const { province: selectedProvince } = useProvince();
 
     useEffect(() => {
-      const fetchProvinces = async() => {
+      const fetchProvinces = async () => {
         try {
-          const response = await fetch(base_url + '/provinces');
-          const data = await response.json();
-          setProvinces(data);
+            const response = await fetch('/provinces');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            setProvinces(data);
         } catch (error) {
-          console.error('Error fetching provinces:', error);
+            console.error('Error fetching provinces:', error);
         }
-      }
+      };
       
       fetchProvinces();
     }, []);
@@ -42,7 +44,7 @@ const CitySelectionPage = () => {
         try {
           console.log("Selected province " + selectedProvince);
           let province_formatted = selectedProvince.replace(/ /g, '_');
-          const response = await fetch(base_url + '/cities?province=' + province_formatted);
+          const response = await fetch('/cities?province=' + province_formatted);
           const data = await response.json();
           setCities(data);
         } catch (error) {

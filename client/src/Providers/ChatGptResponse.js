@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TripPlanFormatter from '../components/Text/TripPlanFormatter';
 
-const base_url = 'http://localhost:5000'
 
 function ChatGptResponse({inputData}) {
 
@@ -13,7 +12,7 @@ function ChatGptResponse({inputData}) {
         const generatePlan = async() => {
             try {
                 console.log(inputData);
-                const response = await fetch(base_url + '/generate', {
+                const response = await fetch('/generate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
