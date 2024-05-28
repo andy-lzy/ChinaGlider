@@ -29,8 +29,6 @@ def configure_routes(app):
         style = data.get('style')
         intensity = data.get('intensity')
 
-        print(data)
-        print(request)
         if not all([city, province, days, style, intensity]):
             return jsonify({"error": "Missing parameters"}), 400
 
@@ -38,10 +36,7 @@ def configure_routes(app):
         # Generate final output using GPT model
         gpt = ChatGPT()
 
-        # result = gpt.get_response(prompt)
-        result = gpt.dummy_response()
+        result = gpt.get_response(prompt)
+        # result = gpt.dummy_response()
 
-        print(result)
-
-        # Return the result as a JSON response
-        return jsonify(result)
+        return result

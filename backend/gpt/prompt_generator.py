@@ -12,6 +12,23 @@ class PromptGenerator:
         2. identify if this place is an Attraction or a Restaurant, 
         3. A brief description of 50 words or less of the place. For each day, recommend at most 3 attractions and 3 restaurants to start off with. 
 
-        Present the plan in JSON style.'''
+        Present the plan in JSON style with the following format:
+        {{
+            "day1": {{
+                "places": [
+                    {{
+                        "name": ...,
+                        "type": ...,
+                        "description": ...
+                    }},
+                    {{
+                        "name": ...,
+                        "type": ...,
+                        "description": ...
+                    }}
+                ]
+            }},
+            "day2": ...
+        }}'''
 
         return prompt

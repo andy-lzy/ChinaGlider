@@ -24,8 +24,19 @@ function ChatGptResponse({inputData}) {
                     throw new Error('Network response was not ok');
                 }
 
-                const data = await response.json();
-                setBasicPlan(data);
+                const textData = await response.text(); // Fetch as text
+                console.log("Received plan as text:", textData);
+
+                let parsedData;
+                try {
+                    parsedData = JSON.parse(textData); // Manually parse JSON
+                    console.log("Parsed plan:", parsedData);
+                    console.log("Type of parsed plan:", typeof parsedData);
+                } catch (parseError) {
+                    throw new Error('Failed to parse JSON');
+                }
+
+                setBasicPlan(parsedData);
             } catch (error) {
                 console.error('Error generating basic plan:', error);
                 setError(error.message);
@@ -43,7 +54,6 @@ function ChatGptResponse({inputData}) {
 
     return (
         <div>
-            <h1>Generated Plan</h1>
             {basicPlan ? <TripPlanFormatter data={basicPlan} /> : error}
         </div>
     );

@@ -23,12 +23,16 @@ const PlanGeneratorPage = () => {
     style: selectedStyle,
     intensity: selectedIntencity
   }
-  console.log(JSON.stringify(inputData));
 
   return (
     <div>
-      <h1>Travel Plan</h1>
+      <div>
+        <Title text={"Each of us seeks something different from a trip to China"} className={"greetingTitle"} />
+      </div>
       <ChatGptResponse inputData={inputData} />
+      <NavigationButton className="backButton" to="/style-selection">
+        BACK
+      </NavigationButton>
     </div>
   );
 };
